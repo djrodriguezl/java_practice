@@ -27,6 +27,7 @@ public class Examen1 {
 	        String nombre_producto;
 	        double max = 0, min= 0;
 	        double neto_Bs = 0, neto_dollar = 0;
+	        double bruto_Bs = 0, bruto_dollar = 0;
 
 	        System.out.print("Ingrese la cantidad de productos: ");
 	        int obj = sc.nextInt();
@@ -45,9 +46,13 @@ public class Examen1 {
 	                max = price;
 	            }
 
-	            if (price < min) {
+	            if (price < min || i == 0) {
 	                min = price;
 	            }
+	            
+	          neto_Bs += price * qty;
+	          neto_dollar += (price * qty) / dollar;
+	       
 	        }
 
 	        int option = 0;
@@ -63,13 +68,13 @@ public class Examen1 {
 
 	        switch (option) {
 	            case 1:
-	                System.out.print("El producto más costoso tiene un valor de: " + max + " en Bs, en divisas: " + (max + (max / dollar)));
+	                System.out.print("El producto más costoso tiene un valor de: " + max + " en Bs, en divisas: " + (max / dollar));
 	                break;
 	            case 2:
-	                System.out.print("El producto menos costoso tiene un valor de: " + min + " en Bs, en divisas: " + (min + (min / dollar)));
+	                System.out.print("El producto menos costoso tiene un valor de: " + min + " en Bs, en divisas: " + (min / dollar));
 	                break;
 	            case 3:
-	               
+	               System.out.print("El producto con más stock ");
 	                break;
 	            case 4:
 	               
