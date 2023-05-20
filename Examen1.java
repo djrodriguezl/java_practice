@@ -28,6 +28,8 @@ public class Examen1 {
 	        double max = 0, min= 0;
 	        double neto_Bs = 0, neto_dollar = 0;
 	        double bruto_Bs = 0, bruto_dollar = 0;
+	        double dollar_max = 0, dollar_min = 0;
+	        int max_qty = 0, min_qty = 0;
 
 	        System.out.print("Ingrese la cantidad de productos: ");
 	        int obj = sc.nextInt();
@@ -50,8 +52,20 @@ public class Examen1 {
 	                min = price;
 	            }
 	            
-	          neto_Bs += price * qty;
-	          neto_dollar += (price * qty) / dollar;
+	            if(qty > max_qty) {
+	            	max_qty = qty;
+	            }
+	            
+	            if (qty < min_qty || i == 0) {
+	            	min_qty = qty;
+	            }
+	            
+	          neto_Bs += (price * qty) + IVA;
+	          neto_dollar += ((price * qty) + IVA) / dollar;
+	          bruto_Bs += price * qty;
+	          bruto_dollar += (price * qty) / dollar;
+	          dollar_max = max / dollar;
+	          dollar_min = min / dollar;
 	       
 	        }
 
@@ -68,22 +82,22 @@ public class Examen1 {
 
 	        switch (option) {
 	            case 1:
-	                System.out.print("El producto más costoso tiene un valor de: " + max + " en Bs, en divisas: " + (max / dollar));
+	                System.out.print("El producto más costoso tiene un valor de: " + max + " en Bs, en divisas: " + (dollar_max));
 	                break;
 	            case 2:
-	                System.out.print("El producto menos costoso tiene un valor de: " + min + " en Bs, en divisas: " + (min / dollar));
+	                System.out.print("El producto menos costoso tiene un valor de: " + min + " en Bs, en divisas: " + (dollar_min));
 	                break;
 	            case 3:
-	               System.out.print("El producto con más stock ");
+	               System.out.print("El producto con más stock tiene: " + max_qty);
 	                break;
 	            case 4:
-	               
+	            	System.out.print("El producto con menos stock tiene:  " + min_qty);
 	                break;
 	            case 5:
-	                System.out.print("El Total Neto es de: " + (neto_Bs + (neto_Bs * IVA)) + " en Bs, en divisas: " + (neto_dollar + (neto_dollar * IVA)));
+	                System.out.print("El Total Neto es de: " + neto_Bs + " en Bs, en divisas: " + (Math.round(neto_dollar)));
 	                break;
 	            case 6:
-	            	System.out.print("El Total Bruto es de: " + neto_Bs + "en Bs, en divisas: " + neto_dollar);
+	            	System.out.print("El Total Bruto es de: " + bruto_Bs + "en Bs, en divisas: " + (Math.round(bruto_dollar)));
 	                break;
 	            default:
 	                System.err.println();
